@@ -1,7 +1,7 @@
 function M = compute_sym_m(dh_table, sigma)
-%COMPUTE_SYM_M Computes Inertia Matrix M through Lagrange-Euler method:
+%COMPUTE_SYM_M Computes Inertia Matrix M through Lagrange-Euler method.
 %  dh_table : [nx4] Denavit Hartenberg table of the arm
-%  sigma : [nx1] prismatic flag vector
+%  sigma    : [nx1] prismatic flag vector
 %  Returns:
 %  M : [nxn] Inertia matrix
 
@@ -18,4 +18,5 @@ function M = compute_sym_m(dh_table, sigma)
 % Made by Emanuele Giacomini (2020)
 
 [n, ~] = size(dh_table);
+vprev = 
 end
