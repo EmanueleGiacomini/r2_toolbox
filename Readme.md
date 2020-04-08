@@ -13,6 +13,7 @@ The Toolkit uses the standard convention presented during lectures of Robotics1 
 ### Terminology
 In case you don't understand some terminology of the toolbox, you may find (and also request) explanation here:
 
+- __rci__ : position wrt RFi of a link's CoM 
 - __roc__ : position wrt RF0 of a link's CoM
 
 
