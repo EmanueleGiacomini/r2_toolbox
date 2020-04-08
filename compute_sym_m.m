@@ -3,7 +3,7 @@ function M = compute_sym_m(dh_table, dq, sigma, offset, mass, inertia)
 %  dh_table : [nx4] Denavit Hartenberg table of the arm
 %  dq       : [nx1] joint velocities vector
 %  sigma    : [nx1] prismatic flag vector
-%  offset   : [nx1] CoM x-axis offset vector
+%  offset   : [3xn] CoM offset vector (rci)
 %  mass     : [nx1] Link mass vector
 %  inertia  : [3x3xn] Inertia tensor
 %  Returns:
@@ -27,6 +27,9 @@ zi = [0;0;1];
 w0 = 0;
 v0 = 0;
 
+% total kinetic energy
+T = 0;
+
 for i=1:n
     % computes the current link kinetic energy based on slides:
     % 04_LagrangianDynamics_2.pdf page: 5
@@ -35,8 +38,8 @@ for i=1:n
     % ri = dh_table(i, 2);
     % rot_i = h2r(dh_transform_m(dh_table, i, i));
     [rot_i, ri] = h2rt(dh_transform_m(dh_table, i, i));
-    % CoM offset ( from RFi hence a subtraction of li from di )
-    rci = [-dh_table(i, 3) + offset(i);0;0];
+    % CoM offset
+    rci = offset(:, i);
     sig = sigma(i);
     dqi = dq(i);
     % angvel i from RFi-1
@@ -48,14 +51,34 @@ for i=1:n
     
     % compute vci (translational velocity of the CoM)
     vci = simplify(vi + cross(wi, rci));
-    vci = simplify(vci)
     ic = inertia(:, :, i);
     % Kinetic energy of the i-th link
-    ti = simplify(1/2 * (wi' * ic * wi + mass(i) * (vci' * vci)));
-    
-    % TODO(Emanuele): Use the kinetic energy to compute the intertia matrix
+    ti = 1/2 * mass(i) * (vci' * vci) + 1/2 * (wi' * ic * wi);
+    ti = simplify(ti);
+    % sum to total kinetic energy
+    T = T + ti;
     
     v0 = vi;
     w0 = wi;
 end
+T = simplify(T);
+% From T, compute the intertia matrix elements
+
+% This section is taken from getM.m [Robotics2Tools]
+% magic
+for i=1:n
+    q_d(i) = sym(dq(i));
+end
+dLdq = sym(zeros(n,n));
+
+for i = 1:n
+    for k = 1:n
+        dLdq(i,k) = diff(T, q_d(1, i));
+        dLdq(i,k) = simplify(dLdq(i,k));
+        
+        dLdq(i,k) = diff(dLdq(i,k), q_d(1,k));
+        dLdq(i,k) = simplify(dLdq(i,k));
+    end
+end
+M = simplify(dLdq);
 end
