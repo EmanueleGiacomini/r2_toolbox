@@ -28,12 +28,11 @@ sigma = [1;0;1];
 mass = [m1;m2;m3];
 
 % compute roc
+roc(:, 1) = compute_roc(dht, offset, 1)
+roc(:, 2) = compute_roc(dht, offset, 2)
+roc(:, 3) = compute_roc(dht, offset, 3)
 
-% [RFi] "d" + offset_rfi <- ric (pos com wrt rfi)
-dhi = dh_transform_m(dht, 1, 1)
-% DHi * ric <- roc (pos com wrt rf0)
-
-%G = compute_gravity(q, mass, roc, g_vect)
+G = simplify(compute_gravity(q, mass, roc, g_vect))
 
 
 %M = compute_sym_m(dht, dq, sigma, offset, mass, inertia)
