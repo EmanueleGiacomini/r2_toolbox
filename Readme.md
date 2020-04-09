@@ -3,12 +3,6 @@ The DnR toolkit is based on [Robotics2Tools by MoSamArafat](https://github.com/M
 
 ## Overview
 Here are written the standards of the toolbox.
-### Denavit-Hartenberg Table Convention
-The Toolkit uses the standard convention presented during lectures of Robotics1 and Robotics2:
-
-| alpha | d | a | theta |
-|:-:|:-:|:-:|:-:|
-| ... | ... | ... | ...|
 
 ### Terminology
 In case you don't understand some terminology of the toolbox, you may find (and also request) explanation here:
@@ -16,6 +10,21 @@ In case you don't understand some terminology of the toolbox, you may find (and 
 - __rci__ : position wrt RFi of a link's CoM 
 - __roc__ : position wrt RF0 of a link's CoM
 
+### Denavit-Hartenberg Table Convention
+The Toolkit uses the standard convention presented during lectures of Robotics1 and Robotics2:
+
+| alpha | d | a | theta |
+|:-:|:-:|:-:|:-:|
+| ... | ... | ... | ...|
+
+In order to build the table, let's see how one row generates a new frame RF1 from RF0:
+
+__KEEP IN MIND__ that you need to use the right hand rule to generate the first frame, then I suggest thinking at how you wish to place the next frame, and then build up a chain of rototranslations that can get you there. The 4 parameters of the table lets you play with this rototranslation in the following way:
+* Take RF1 and place it with the same orientation on RF0 position
+* Move RF1 on z0 axis by d, then apply a counter clockwise rotation by theta on RF1 from z0
+* Move RF1 on x1 axis by a, then apply a counter clockwise rotation by alpha on RF1 from x1#
+
+Remember that only x and z axis are used during the rototranslation, and that (d, theta) are applied onto z0 while (a, alpha) are applied on x1.
 
 ## Functions
 Here the functions are briefly described
