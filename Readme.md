@@ -45,8 +45,12 @@ Here the functions are briefly described
 - __compute_christoffel__ : Computes the coriolis/centrifugal factorization through christoffel symbols
 - __compute_gravity__ : Compute the gravity vector for the arm
 
-## Examples
+## Generalized Robot computation
+- __planar_robot__ : Dynamic model for a generic planar robot.
+
+### Examples
 Some examples are also provided on operativity of the toolbox:
 - *planar_2r*  : Dynamic model for 2R planar robot.
 - *planar_prp* : Dynamic model for PRP planar robot.
+- *planar_pprr* : Dynamic model for PPRR planar robot.
 - *spatial_3r* : Dynamic model for 3R spatial robot.
