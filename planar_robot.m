@@ -1,3 +1,6 @@
+% Simple Planar Robot generator:
+% Make changes in the "edit here" blocks.
+
 % ----------------- EDIT HERE ----------------- %
 % Number of joints
 n = 4;
@@ -19,7 +22,7 @@ syms ddq [1 n] real
 ddq = transpose(ddq);
 syms m [1 n] real
 m = transpose(m);
-syms l [1 n] real % Links lenght
+syms l [1 n] real % Links length
 l = transpose(l);
 syms d [1 n] real % Joint-COM displacement
 d = transpose(d);
