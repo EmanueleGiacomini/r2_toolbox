@@ -38,7 +38,8 @@ Here the functions are briefly described
 - __dh_transform_m__ : Compute the h.transformation matrix given the DH table, a source joint and a destination joint
 #### Generic
 - __compute_roc__ : Compute the RoC vector given the DH table and a link index
-
+### Kinematics Redundancy
+- __kr_task_sns__ : Computes the joint commands to complete a task _r_ through SNS (Saturation of Null-Space) method
 ### Dynamics
 - __compute_sym_m__ : Computes the Symbolic Inertia matrix M(q, q_dot)
 - __compute_num_m__ : Computes the Numerical Inertia matrix M(q, q_dot) through the Euler-Newton method.
