@@ -47,6 +47,7 @@ Here the functions are briefly described
 
 ## Generalized Robot computation
 - __planar_robot__ : Dynamic model for a generic planar robot.
+- __spatial_robot__ : Dynamic model for a generic spatial robot.
 
 ### Examples
 Some examples are also provided on operativity of the toolbox:
