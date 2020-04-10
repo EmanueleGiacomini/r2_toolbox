@@ -1,4 +1,4 @@
-% Simple Planar Robot generator:
+% Simple Spatial Robot generator:
 % Make changes in the "edit here" blocks.
 
 % Inertia terms legend: 
@@ -7,10 +7,13 @@
 
 % ----------------- EDIT HERE ----------------- %
 % Number of joints
-n = 4;
+n = 3;
 
 % Type of joints (1 if prismatic, 0 if revolute)
-sigma = [1;1;0;0];
+sigma = [0;0;0];
+
+% Add symbolic offsets if needed
+syms A C D E F real
 
 % Gravity vector
 syms g0 real
@@ -40,28 +43,26 @@ end
 
 % ----------------- EDIT HERE ----------------- %
 % DH Table [ alpha, d, a, theta ]
-dht(1, :) = [pi/2, q1, 0, 0];
-dht(2, :) = [pi/2, q2, 0, pi/2];
-dht(3, :) = [0, 0, l3, q3];
-dht(4, :) = [0, 0, l4, q4];
+dht(1, :) = [pi/2 , l1, 0, q1];
+dht(2, :) = [0, 0, l2, q2];
+dht(3, :) = [0, 0, l3,q3];
 
 % COM offsets
-offset(:, 1) = [0;0;-d1];
-offset(:, 2) = [0;0;-d2];
-offset(:, 3) = [-l3+d3;0;0];
-offset(:, 4) = [-l4+d4;0;0];
+offset(:, 1) = [A;-F;0];
+offset(:, 2) = [-C;0;0];
+offset(:, 3) = [-D;0;E];
 % --------------------------------------------- %
 
 % Compute roc
-roc = sym(zeros(3, n));
-for i=1:n
-    roc(:, i) = compute_roc(dht, offset, i);
-end
+%roc = sym(zeros(3, n));
+%for i=1:n
+%    roc(:, i) = compute_roc(dht, offset, i);
+%end
 
 % Compute Robot Inertia Matrix
 M = compute_sym_m(dht, dq, sigma, offset, m, inertia)
 % Compute Christoffel and Skew-Symm
 [c, S] = compute_christoffel(M, q, dq)
 % Compute Gravity Term
-G = simplify(compute_gravity(q, m, roc, g_vect))
+%G = simplify(compute_gravity(q, m, roc, g_vect))
 
