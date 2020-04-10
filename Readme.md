@@ -39,7 +39,11 @@ Here the functions are briefly described
 #### Generic
 - __compute_roc__ : Compute the RoC vector given the DH table and a link index
 ### Kinematics Redundancy
+- __kr_task_dls__ : Computes the joint commands to complete a task _r_ through DLS (Dampened Least Squares) method
+- __kr_task_pg__ : Computes the joint commands to complete a task _r_ through PG (Projected Gradient) method
+- __kr_task_rg__ : Computes the joint commands to complete a task _r_ through RG (Reduced Gradient) method
 - __kr_task_sns__ : Computes the joint commands to complete a task _r_ through SNS (Saturation of Null-Space) method
+- __kr_task_wpinv__ : Computes the joint commands to complete a task _r_ through Weighed PseudoInverse method
 ### Dynamics
 - __compute_sym_m__ : Computes the Symbolic Inertia matrix M(q, q_dot)
 - __compute_num_m__ : Computes the Numerical Inertia matrix M(q, q_dot) through the Euler-Newton method.
