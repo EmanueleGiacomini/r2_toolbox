@@ -83,4 +83,7 @@ codegen/
 # Octave session info
 octave-workspace
 
+# Other stuff
+out_display.mlx
+
 # End of https://www.gitignore.io/api/emacs,matlab

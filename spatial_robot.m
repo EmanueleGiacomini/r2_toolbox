@@ -1,10 +1,6 @@
 % Simple Spatial Robot generator:
 % Make changes in the "edit here" blocks.
 
-% Inertia terms legend: 
-% Iki_j -> intertia element of link k, row i and column j
-% E.g. I43_3 -> zz inertia term of link 4
-
 % ----------------- EDIT HERE ----------------- %
 % Number of joints
 n = 3;
@@ -18,6 +14,14 @@ syms A C D E F real
 % Gravity vector
 syms g0 real
 g_vect = [0;0;-g0];
+
+% Barycentric Inertia terms legend: 
+% Iki_j -> intertia element of link k, row i and column j
+% E.g. I43_3 -> zz inertia term of link 4
+
+% Set true if the barycentric link inertia matrix is diagonal (orse false)
+diag_inertia = true;
+
 % --------------------------------------------- %
 
 %syms('q', [1 n], real)
@@ -39,6 +43,9 @@ inertia = sym(zeros(3,3,n));
 for i=1:n
     str = strcat('I',int2str(i));
     inertia(:,:,i) = sym(str, [3,3]);
+    if(diag_inertia) 
+        inertia(:,:,i) = diag(diag(inertia(:,:,i)));
+    end
 end
 
 % ----------------- EDIT HERE ----------------- %
