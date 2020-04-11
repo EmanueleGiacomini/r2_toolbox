@@ -1,6 +1,6 @@
 function H = dh_step(r)
 %DH_STEP Compute a single step in the DH trasformation.
-%  r : [1x4] source row of the dh table
+%  r : [1x4] Source row of the dh table
 %  Returns:
 %  H : [4x4] Homogeneous Transformation Matrix
 

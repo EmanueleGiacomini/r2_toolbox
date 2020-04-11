@@ -43,7 +43,9 @@ for i=1:n
     % derivative of mi w.r.t. q
     dmi_dq = collect(simplify(jacobian(mi, q)), vars);
     % compute the C_k(q) term (k-th component of vector c)
+    fprintf('[Christoffel] C_%i\n', i)
     c_i = collect(simplify(0.5 * (dmi_dq + dmi_dq' - diff(M, q(i)))), vars);
+    disp(c_i);
     c(i, 1) = collect(simplify(dq' * c_i * dq), vars);
     % compute the skew factorization matrix based on slides:
     % 03_LagrangianDytnamics_1.pdf page: 28
