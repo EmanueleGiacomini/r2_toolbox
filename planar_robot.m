@@ -45,6 +45,9 @@ for i=1:n
     end
 end
 
+dht = sym(zeros(n,4));
+offset = sym(zeros(3,n));
+
 % ----------------- EDIT HERE ----------------- %
 % DH Table [ alpha, d, a, theta ]
 dht(1, :) = [pi/2, q1, 0, 0];
